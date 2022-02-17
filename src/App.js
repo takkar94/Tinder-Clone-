@@ -2,6 +2,7 @@ import React from 'react'
 import Header  from './Header';
 import './App.css';
 import TinderCards from './TinderCards';
+import SwipeButtons from './SwipeButtons'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <h1>Tinder Clone</h1>
       <Header/>
       <TinderCards/>
+      <SwipeButtons/>
     </div>
   );
 }
