@@ -1,21 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./TinderCards.css";
 import TinderCard from "react-tinder-card";
 import { SwipeableDrawer } from "@material-ui/core";
+import axios from './axios';
 
 
 function TinderCards () {
 
+    //sample data 
+    // {
+    //     name: 'Elon Musk', 
+    //     url:"https://media.gettyimages.com/photos/of-tesla-and-space-x-elon-musk-attends-the-2015-vanity-fair-oscar-picture-id464172224?s=2048x2048"
+    // },
+    // {
+    //     name: 'Jeff Bezos', 
+    //     url:"https://imageio.forbes.com/specials-images/imageserve/5f469ea85cc82fc8d6083f05/Amazon-Founder-and-CEO-Jeff-Bezos/960x0.jpg?fit=bounds&format=jpg&width=960"
+    // },
+
+
+
+
     const [people, setPeople] = useState([
-        {
-            name: 'Elon Musk', 
-            url:"https://media.gettyimages.com/photos/of-tesla-and-space-x-elon-musk-attends-the-2015-vanity-fair-oscar-picture-id464172224?s=2048x2048"
-        },
-        {
-            name: 'Jeff Bezos', 
-            url:"https://imageio.forbes.com/specials-images/imageserve/5f469ea85cc82fc8d6083f05/Amazon-Founder-and-CEO-Jeff-Bezos/960x0.jpg?fit=bounds&format=jpg&width=960"
-        },
+       
     ]);
+
+
+    useEffect(()=> {
+        async function fetchData() {
+            const req = await axios.get('./cards')
+            setPeople(req.data)
+        }
+        fetchData();
+    }, [])
 
     const swiped = (direction, nameToDelete) => {
         console.log(`Removing ${nameToDelete}` );
